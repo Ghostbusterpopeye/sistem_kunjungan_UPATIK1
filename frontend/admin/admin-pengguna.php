@@ -48,7 +48,6 @@ if ($conn) {
     ];
 }
 
-$statusBadge = ['mahasiswa'=>'🎓 Mahasiswa','dosen'=>'👨‍🏫 Dosen'];
 
 $title = 'Admin Pengguna';
 include '../../includes/header.php';

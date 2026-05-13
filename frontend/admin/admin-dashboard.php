@@ -143,16 +143,7 @@ include '../../includes/header.php';
                     $statusLabel = ['menunggu'=>'Menunggu','diproses'=>'Sedang Diproses','selesai'=>'Selesai'];
                     $tglIsi = date('d/m/Y H:i', strtotime($a['tanggal_isi']));
                 ?>
-                <div class="user-item antrean-row" onclick="openDetailModal(this)"
-                    data-id="<?= $a['id_formulir'] ?>"
-                    data-nama="<?= htmlspecialchars($a['nama_lengkap']) ?>"
-                    data-nim="<?= htmlspecialchars($a['nim_nip']) ?>"
-                    data-email="<?= htmlspecialchars($a['email']) ?>"
-                    data-layanan="<?= htmlspecialchars($a['nama_layanan']) ?>"
-                    data-peran="<?= htmlspecialchars($a['peran']) ?>"
-                    data-status="<?= htmlspecialchars($statusLabel[$a['status_layanan']] ?? $a['status_layanan']) ?>"
-                    data-tgl="<?= htmlspecialchars($tglIsi) ?>"
-                    data-deskripsi="<?= htmlspecialchars($a['detail_layanan']) ?>">
+                <div class="user-item antrean-row"> 
 
                     <div class="user-avatar" style="background: linear-gradient(135deg, <?= $color ?> 0%, <?= $color ?>aa 100%);">
                         <?= $initials ?>
@@ -165,6 +156,21 @@ include '../../includes/header.php';
                         <?= $statusLabel[$a['status_layanan']] ?? ucfirst($a['status_layanan']) ?>
                     </div>
                     <div class="user-actions">
+                        <button class="btn-action btn-accent2" onclick="openDetailModal(this)"                     
+                            data-id="<?= $a['id_formulir'] ?>"
+                            data-nama="<?= htmlspecialchars($a['nama_lengkap']) ?>"
+                            data-nim="<?= htmlspecialchars($a['nim_nip']) ?>"
+                            data-email="<?= htmlspecialchars($a['email']) ?>"
+                            data-layanan="<?= htmlspecialchars($a['nama_layanan']) ?>"
+                            data-peran="<?= htmlspecialchars($a['peran']) ?>"
+                            data-status="<?= htmlspecialchars($statusLabel[$a['status_layanan']] ?? $a['status_layanan']) ?>"
+                            data-tgl="<?= htmlspecialchars($tglIsi) ?>"
+                            data-deskripsi="<?= htmlspecialchars($a['detail_layanan']) ?>">
+                            <i class="fas fa-eye"></i> Detail
+                        </button>
+                    </div>
+                    <div class="user-actions">
+
                         <button class="btn-action btn-primary" onclick="event.stopPropagation(); tandaiSelesai(this, <?= $a['id_formulir'] ?>)">
                             <i class="fas fa-check"></i> Selesai
                         </button>
