@@ -85,7 +85,7 @@ $descMap = [
   style="background: linear-gradient(rgba(15,20,60,0.58),rgba(15,20,60,0.58)),
          url('assets/polije.png') center/cover no-repeat;">
   <div class="hero-content">
-    <h1>Sistem<br>Layanan IT Kampus</h1>
+    <h1>Sistem<br>Kunjungan UPA TIK</h1>
     <p>Pusat bantuan teknologi informasi untuk civitas akademika<br>Politeknik Negeri Jember.</p>
     <div class="hero-btns">
       <?php if ($user): ?>
@@ -154,7 +154,7 @@ $descMap = [
 <!-- ══ CTA ════════════════════════════════════════════════════════════════════ -->
 <section style="background:linear-gradient(135deg,var(--primary),var(--accent));padding:80px 40px;text-align:center;">
   <h2 style="font-family:'Sora',sans-serif;color:white;font-size:2rem;font-weight:800;margin-bottom:16px;" class="reveal">
-    Butuh bantuan IT? Kami siap membantu! 🚀
+    Butuh bantuan IT? Kami siap membantu! 
   </h2>
   <p style="color:rgba(255,255,255,0.85);margin-bottom:32px;font-size:1rem;" class="reveal">
     Buat jadwal kunjungan dan dapatkan layanan IT terbaik dari tim profesional UPA TIK Polije.
