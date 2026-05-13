@@ -41,19 +41,6 @@ if (empty($layananList)) {
     ];
 }
 
-// Metadata icon per nama layanan
-$iconMap = [
-    'SSO Email'                 => '📧',
-    'Reset Password'            => '🔑',
-    'Pemasangan VPN'            => '🔐',
-    'Keluhan IT'                => '⚡',
-    'Maintenance'               => '🎯',
-    'Instalasi Software'        => '💻',
-    'Konsultasi IT'             => '🌐',
-    'Keamanan Siber'            => '🛡️',
-    'Jaringan & Infrastruktur'  => '📡',
-    'E-Learning'              => '🎓',
-];
 $descMap = [
     'Pemasangan VPN'            => 'Akses jaringan internal kampus dari luar area Politeknik Negeri Jember dengan aman dan terenkripsi.',
     'Keluhan IT'                => 'Layanan penanganan keluhan IT. Tim kami siap merespons masalah teknis Anda secara cepat dan profesional.',
