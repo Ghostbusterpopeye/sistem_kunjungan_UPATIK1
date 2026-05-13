@@ -11,6 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -53,7 +54,7 @@ CREATE TABLE `akun_pengguna` (
   `nama_lengkap` varchar(100) NOT NULL,
   `nim_nip` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `status` enum('mahasiswa','dosen') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -104,7 +105,7 @@ CREATE TABLE `layanan` (
   `id_layanan` int NOT NULL,
   `nama_layanan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `detail_layanan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `detail_layanan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bg_0900_ai_ci NOT NULL,
   `status` enum('aktif','nonaktif') NOT NULL DEFAULT 'aktif'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -152,34 +153,91 @@ INSERT INTO `tindakan_layanan` (`id_tindakan`, `id_formulir`, `id_admin`, `tangg
 -- Indexes for dumped tables
 --
 
-ALTER TABLE `akun_admin` ADD PRIMARY KEY (`id_admin`);
-ALTER TABLE `akun_pengguna` ADD PRIMARY KEY (`id_pengguna`);
-ALTER TABLE `formulir_layanan` ADD PRIMARY KEY (`id_formulir`), ADD KEY `id_pengguna` (`id_pengguna`), ADD KEY `id_layanan` (`id_layanan`);
-ALTER TABLE `layanan` ADD PRIMARY KEY (`id_layanan`);
-ALTER TABLE `tindakan_layanan` ADD PRIMARY KEY (`id_tindakan`), ADD KEY `id_formulir` (`id_formulir`), ADD KEY `id_admin` (`id_admin`);
+--
+-- Indexes for table `akun_admin`
+--
+ALTER TABLE `akun_admin`
+  ADD PRIMARY KEY (`id_admin`);
 
 --
--- AUTO_INCREMENT
+-- Indexes for table `akun_pengguna`
+--
+ALTER TABLE `akun_pengguna`
+  ADD PRIMARY KEY (`id_pengguna`);
+
+--
+-- Indexes for table `formulir_layanan`
+--
+ALTER TABLE `formulir_layanan`
+  ADD PRIMARY KEY (`id_formulir`),
+  ADD KEY `id_pengguna` (`id_pengguna`),
+  ADD KEY `id_layanan` (`id_layanan`);
+
+--
+-- Indexes for table `layanan`
+--
+ALTER TABLE `layanan`
+  ADD PRIMARY KEY (`id_layanan`);
+
+--
+-- Indexes for table `tindakan_layanan`
+--
+ALTER TABLE `tindakan_layanan`
+  ADD PRIMARY KEY (`id_tindakan`),
+  ADD KEY `id_formulir` (`id_formulir`),
+  ADD KEY `id_admin` (`id_admin`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
-ALTER TABLE `akun_admin` MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-ALTER TABLE `akun_pengguna` MODIFY `id_pengguna` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-ALTER TABLE `formulir_layanan` MODIFY `id_formulir` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-ALTER TABLE `layanan` MODIFY `id_layanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-ALTER TABLE `tindakan_layanan` MODIFY `id_tindakan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `akun_admin`
+--
+ALTER TABLE `akun_admin`
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `akun_pengguna`
+--
+ALTER TABLE `akun_pengguna`
+  MODIFY `id_pengguna` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `formulir_layanan`
+--
+ALTER TABLE `formulir_layanan`
+  MODIFY `id_formulir` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `layanan`
+--
+ALTER TABLE `layanan`
+  MODIFY `id_layanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tindakan_layanan`
+--
+ALTER TABLE `tindakan_layanan`
+  MODIFY `id_tindakan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
 
+--
+-- Constraints for table `formulir_layanan`
+--
 ALTER TABLE `formulir_layanan`
   ADD CONSTRAINT `formulir_layanan_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `akun_pengguna` (`id_pengguna`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `formulir_layanan_ibfk_2` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Constraints for table `tindakan_layanan`
+--
 ALTER TABLE `tindakan_layanan`
   ADD CONSTRAINT `tindakan_layanan_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `akun_admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tindakan_layanan_ibfk_2` FOREIGN KEY (`id_formulir`) REFERENCES `formulir_layanan` (`id_formulir`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
