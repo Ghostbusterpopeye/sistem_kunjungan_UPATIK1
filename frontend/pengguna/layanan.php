@@ -25,19 +25,6 @@ if (empty($layananList)) {
         ['id_layanan'=>10,'nama_layanan'=>'E-Learning'],
     ];
 }
-
-$layananMeta = [
-    'SSO Email'                => ['icon'=>'📧','desc'=>'Aktivasi dan pemulihan akun Single Sign-On email institusi (@polije.ac.id). Satu akun untuk semua sistem kampus.'],
-    'Reset Password'           => ['icon'=>'🔑','desc'=>'Pemulihan akses akun SIAKAD, portal akademik, e-learning Moodle, dan sistem kampus lainnya.'],
-    'Pemasangan VPN'           => ['icon'=>'🔐','desc'=>'Akses jaringan internal kampus dari luar area Politeknik Negeri Jember dengan aman dan terenkripsi.'],
-    'Keluhan IT'               => ['icon'=>'⚡','desc'=>'Penanganan keluhan IT dari masalah koneksi, perangkat lunak, hingga hardware. Respons cepat profesional.'],
-    'Maintenance'              => ['icon'=>'🎯','desc'=>'Maintenance server seluruh jurusan Polije. Pemeliharaan preventif dan korektif untuk performa optimal.'],
-    'Instalasi Software'       => ['icon'=>'💻','desc'=>'Instalasi dan konfigurasi perangkat lunak berlisensi untuk kebutuhan akademik dan administrasi kampus.'],
-    'Konsultasi IT'            => ['icon'=>'🌐','desc'=>'Konsultasi teknis seputar penggunaan teknologi informasi, analisis kebutuhan sistem, dan optimasi infrastruktur.'],
-    'Keamanan Siber'           => ['icon'=>'🛡️','desc'=>'Perlindungan data dan keamanan sistem dari ancaman siber. Edukasi dan penanganan insiden keamanan informasi.'],
-    'Jaringan & Infrastruktur' => ['icon'=>'📡','desc'=>'Pengelolaan jaringan WiFi kampus, pengkabelan LAN, konfigurasi switch dan router. Laporan masalah koneksi ditangani cepat.'],
-    'E-Learning'              => ['icon'=>'🎓','desc'=>'Dukungan teknis untuk platform e-learning Website pembelajaran mahasiswa.'],
-];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -96,7 +83,7 @@ $layananMeta = [
           Buat Jadwal Kunjungan
         </a>
         <?php else: ?>
-        <p style="color:var(--text-muted);margin-bottom:16px;">Silakan login untuk membuat jadwal kunjungan.</p>
+        <p style="color:var(--text-muted);margin-bottom:16px;">Silakan login untuk membuat jadwal kunjungan</p>
         <a href="<?= BASE_URL ?>/frontend/auth/login.php" class="btn btn-primary" style="font-size:1rem;padding:16px 40px;">
           Login untuk Kunjungan
         </a>

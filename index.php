@@ -72,7 +72,7 @@ $descMap = [
   style="background: linear-gradient(rgba(15,20,60,0.58),rgba(15,20,60,0.58)),
          url('assets/polije.png') center/cover no-repeat;">
   <div class="hero-content">
-    <h1>Sistem<br>Kunjungan UPA TIK</h1>
+    <h1>Sistem Kunjungan<br>UPA TIK</h1>
     <p>Pusat bantuan teknologi informasi untuk civitas akademika<br>Politeknik Negeri Jember.</p>
     <div class="hero-btns">
       <?php if ($user): ?>
