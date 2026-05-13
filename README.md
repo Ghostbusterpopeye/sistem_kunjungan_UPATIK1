@@ -1,34 +1,99 @@
-🛠 Aturan Kontribusi & Kolaborasi
-Demi menjaga stabilitas dan kualitas kode pada proyek ini, harap mengikuti prosedur kolaborasi berikut:
+# Sistem Kunjungan UPA TIK Polije
 
-1. Jangan Push Langsung ke main
-Cabang main dilindungi dan hanya dapat diakses oleh kontributor yang diizinkan. Dilarang melakukan git push secara langsung ke branch main.
+Sistem informasi berbasis web untuk mengelola dan mencatat data kunjungan di Unit Pelaksana Akademik (UPA) Teknologi Informasi dan Komunikasi, Politeknik Negeri Jember.
 
-2. Alur Kerja (Workflow)
-Setiap penambahan fitur atau perbaikan bug wajib melalui alur:
+---
 
-Buat Branch Baru: Selalu buat branch baru sebelum mulai mengerjakan sesuatu.
+## Deskripsi Proyek
 
-Bash
-git checkout -b nama-fitur-anda
-Commit Pekerjaan: Lakukan commit secara berkala dengan pesan yang deskriptif.
+Aplikasi ini dikembangkan untuk menggantikan pencatatan kunjungan manual menjadi sistem digital yang lebih efisien. Sistem memungkinkan pengelolaan data pengunjung, pemantauan aktivitas, serta pembuatan laporan kunjungan.
 
-Push Branch: Unggah branch tersebut ke GitHub.
+---
 
-Bash
-git push origin nama-fitur-anda
-Buat Pull Request (PR): Buka repositori di GitHub, lalu ajukan Pull Request dari branch Anda ke main.
+## Fitur Utama
 
-3. Review & Merge
-Setelah Pull Request dibuat, kode Anda akan direview.
+- Dashboard statistik kunjungan
+- Manajemen data pengunjung
+- Sistem login (admin dan petugas)
+- Riwayat dan laporan kunjungan
 
-Perbaikan mungkin diperlukan berdasarkan hasil review.
+---
 
-Hanya admin/kontributor yang ditunjuk yang memiliki wewenang untuk melakukan merge ke dalam branch main.
+## Teknologi yang Digunakan
 
-4. Menjaga Kebersihan Kode
-Pastikan kode sudah rapi dan berfungsi sebelum mengajukan Pull Request.
+- PHP
+- MySQL
+- Bootstrap
+- JavaScript
+- XAMPP / Laragon
 
-Jangan menghapus atau mengubah file yang sudah stabil tanpa koordinasi sebelumnya.
+---
 
-Terima kasih atas kerja sama Anda dalam menjaga kualitas proyek ini.
+## Instalasi dan Setup
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/Ghostbusterpopeye/sistem_kunjungan_UPATIK1.git
+```
+
+### 2. Setup Server
+Pindahkan folder ke:
+- `htdocs` (XAMPP)
+- atau `www` (Laragon)
+
+### 3. Konfigurasi Database
+- Buka phpMyAdmin
+- Buat database baru
+- Import file dari folder:
+```
+database/
+```
+
+- Atur koneksi di:
+```
+config/
+```
+
+### 4. Jalankan Aplikasi
+Akses di browser:
+```
+http://localhost/sistem_kunjungan_UPATIK1
+```
+
+---
+
+## Struktur Folder
+
+```text
+/sistem_kunjungan_UPATIK1
+├── assets/        # File statis (CSS, JS, gambar)
+├── backend/       # Logika backend (proses data)
+├── config/        # Konfigurasi database
+├── database/      # File SQL / database
+├── frontend/      # Tampilan user (UI)
+├── includes/      # File reusable (header, footer, dll)
+├── CONTRIBUTING.md
+├── README.md
+├── index.php      # Halaman utama
+└── setup.php      # Setup awal sistem
+```
+
+---
+
+## Kontribusi
+
+Silakan baca file `CONTRIBUTING.md` untuk panduan kontribusi dan alur kerja tim.
+
+---
+
+## Tim Pengembang
+
+Kelompok 1 F - Semester 2 - Teknik Informatika  
+Politeknik Negeri Jember
+
+---
+
+## Catatan
+
+- Pastikan server lokal aktif sebelum menjalankan aplikasi
+- Gunakan PHP versi 7.4 atau lebih baru
