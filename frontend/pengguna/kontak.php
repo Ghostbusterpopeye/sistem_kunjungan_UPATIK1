@@ -45,7 +45,7 @@ $user = getCurrentUser();
                 <div>
                   <h4 style="font-size:1rem; margin-bottom:5px; color:var(--primary);">Alamat Kantor</h4>
                   <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">
-                    Gedung TI, Politeknik Negeri Jember<br>
+                    Gedung A3, Politeknik Negeri Jember<br>
                     Jl. Mastrip, Krajan Timur, Sumbersari, Jember 68121
                   </p>
                 </div>
