@@ -260,27 +260,28 @@ function exportExcel() {
     <head>
         <meta charset="UTF-8">
         <style>
-            .title { font-size: 16pt; font-weight: bold; text-align: center; }
-            .subtitle { font-size: 12pt; color: #666; text-align: center; }
-            .header-cell { background-color: #2D3A8C; color: #ffffff; font-weight: bold; text-align: center; border: 0.5pt solid #000; }
-            .data-cell { border: 0.5pt solid #ccc; text-align: center; }
-            .label-cell { background-color: #f3f4f6; font-weight: bold; border: 0.5pt solid #ccc; }
+            .title { font-size: 16pt; font-weight: bold; text-align: center; height: 30pt; }
+            .subtitle { font-size: 11pt; color: #444; text-align: center; height: 20pt; }
+            .header-cell { background-color: #2D3A8C; color: #ffffff; font-weight: bold; text-align: center; border: 0.5pt solid #000; vertical-align: middle; }
+            .data-cell { border: 0.5pt solid #ccc; text-align: center; vertical-align: middle; }
+            .label-cell { background-color: #f3f4f6; font-weight: bold; border: 0.5pt solid #ccc; text-align: left; padding-left: 5px; }
             .num-cell { mso-number-format:"\#\,\#\#0"; border: 0.5pt solid #ccc; text-align: center; }
+            .section-title { font-weight:bold; font-size:12pt; background:#e5e7eb; height: 25pt; vertical-align: middle; }
         </style>
     </head>
     <body>
         <table>
-            <tr><td colspan="5" class="title">LAPORAN STATISTIK KUNJUNGAN UPA TIK</td></tr>
-            <tr><td colspan="5" class="subtitle">Dicetak pada: ${today.toLocaleDateString('id-ID')} ${today.toLocaleTimeString('id-ID')}</td></tr>
-            <tr><td></td></tr>
+            <tr><td colspan="13" class="title">LAPORAN STATISTIK KUNJUNGAN UPA TIK</td></tr>
+            <tr><td colspan="13" class="subtitle">Dicetak pada: ${today.toLocaleDateString('id-ID')} ${today.toLocaleTimeString('id-ID')}</td></tr>
+            <tr><td colspan="13"></td></tr>
             
-            <tr><td colspan="5" style="font-weight:bold; font-size:12pt; background:#e5e7eb;">1. RINGKASAN DATA</td></tr>
+            <tr><td colspan="5" class="section-title"> 1. RINGKASAN DATA</td></tr>
             <tr>
-                <td class="header-cell">Total Kunjungan</td>
-                <td class="header-cell">Total Selesai</td>
-                <td class="header-cell">Total Pengguna</td>
-                <td class="header-cell">Rata-rata Bulanan</td>
-                <td class="header-cell">Rata-rata Tahunan</td>
+                <td class="header-cell" style="width:120px;">Total Kunjungan</td>
+                <td class="header-cell" style="width:120px;">Total Selesai</td>
+                <td class="header-cell" style="width:120px;">Total Pengguna</td>
+                <td class="header-cell" style="width:150px;">Rata-rata Bulanan</td>
+                <td class="header-cell" style="width:150px;">Rata-rata Tahunan</td>
             </tr>
             <tr>
                 <td class="num-cell"><?= $totalKunjungan ?></td>
@@ -289,27 +290,27 @@ function exportExcel() {
                 <td class="num-cell"><?= $rataRataBulanan ?></td>
                 <td class="num-cell"><?= $rataRataTahunan ?></td>
             </tr>
-            <tr><td></td></tr>
+            <tr><td colspan="13"></td></tr>
 
-            <tr><td colspan="13" style="font-weight:bold; font-size:12pt; background:#e5e7eb;">2. DATA KUNJUNGAN BULANAN (TAHUN <?= date('Y') ?>)</td></tr>
+            <tr><td colspan="13" class="section-title"> 2. DATA KUNJUNGAN BULANAN (TAHUN <?= date('Y') ?>)</td></tr>
             <tr>
                 <td class="header-cell">Kategori</td>
-                ${labels.map(l => `<td class="header-cell">${l}</td>`).join('')}
+                ${labels.map(l => `<td class="header-cell" style="width:80px;">${l}</td>`).join('')}
             </tr>
             <tr>
                 <td class="label-cell">Jumlah</td>
                 ${dataIni.map(d => `<td class="num-cell">${d}</td>`).join('')}
             </tr>
-            <tr><td></td></tr>
+            <tr><td colspan="13"></td></tr>
 
-            <tr><td colspan="2" style="font-weight:bold; font-size:12pt; background:#e5e7eb;">3. POPULER PER LAYANAN</td></tr>
+            <tr><td colspan="2" class="section-title"> 3. POPULER PER LAYANAN</td></tr>
             <tr>
-                <td class="header-cell" style="width:250px;">Nama Layanan</td>
-                <td class="header-cell">Total Permintaan</td>
+                <td class="header-cell" style="width:300px;">Nama Layanan</td>
+                <td class="header-cell" style="width:150px;">Total Permintaan</td>
             </tr>
             ${perLayananData.map(item => `
                 <tr>
-                    <td class="data-cell" style="text-align:left; padding-left:5px;">${item.nama_layanan}</td>
+                    <td class="data-cell" style="text-align:left; padding-left:10px;">${item.nama_layanan}</td>
                     <td class="num-cell">${item.total}</td>
                 </tr>
             `).join('')}
