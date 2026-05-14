@@ -2,57 +2,59 @@
 require_once '../../includes/auth.php';
 
 if (isLoggedIn()) {
-    header('Location: ' . BASE_URL . '/frontend/pengguna/riwayat.php');
-    exit;
+  header('Location: ' . BASE_URL . '/frontend/pengguna/riwayat.php');
+  exit;
 }
 
 $error   = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama   = trim($_POST['nama']     ?? '');
-    $nim    = trim($_POST['nim']      ?? '');
-    $email  = trim($_POST['email']    ?? '');
-    $status = trim($_POST['status']   ?? 'mahasiswa');
-    $pass   = $_POST['password']      ?? '';
+  $nama   = trim($_POST['nama']     ?? '');
+  $nim    = trim($_POST['nim']      ?? '');
+  $email  = trim($_POST['email']    ?? '');
+  $status = trim($_POST['status']   ?? 'mahasiswa');
+  $pass   = $_POST['password']      ?? '';
 
-    $allowedStatus = ['mahasiswa', 'dosen'];
+  $allowedStatus = ['mahasiswa', 'dosen'];
 
-    if (empty($nama) || empty($nim) || empty($email) || empty($pass)) {
-        $error = 'Semua field wajib diisi.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Format email tidak valid.';
-    } elseif (strlen($pass) < 6) {
-        $error = 'Password minimal 6 karakter.';
-    } elseif (!in_array($status, $allowedStatus)) {
-        $error = 'Status tidak valid.';
-    } else {
-        if ($conn) {
-            $chk = $conn->prepare("SELECT id_pengguna FROM akun_pengguna WHERE nim_nip = ? OR email = ?");
-            $chk->bind_param('ss', $nim, $email);
-            $chk->execute();
-            $chk->store_result();
-            if ($chk->num_rows > 0) {
-                $error = 'NIM/NIP atau Email sudah terdaftar. Silakan login.';
-            } else {
-                $hashed = password_hash($pass, PASSWORD_DEFAULT);
-                $ins = $conn->prepare(
-                    "INSERT INTO akun_pengguna (nama_lengkap, nim_nip, email, password, status)
+  if (empty($nama) || empty($nim) || empty($email) || empty($pass)) {
+    $error = 'Semua field wajib diisi.';
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $error = 'Format email tidak valid.';
+  } elseif (strlen($nim) < 9) {
+    $error = 'nim/nip minimal 9 karakter.';
+  } elseif (strlen($nim) > 16) {
+    $error = 'nim/nip maksimal 16 karakter.';
+  } elseif (!in_array($status, $allowedStatus)) {
+    $error = 'Status tidak valid.';
+  } else {
+    if ($conn) {
+      $chk = $conn->prepare("SELECT id_pengguna FROM akun_pengguna WHERE nim_nip = ? OR email = ?");
+      $chk->bind_param('ss', $nim, $email);
+      $chk->execute();
+      $chk->store_result();
+      if ($chk->num_rows > 0) {
+        $error = 'NIM/NIP atau Email sudah terdaftar. Silakan login.';
+      } else {
+        $hashed = password_hash($pass, PASSWORD_DEFAULT);
+        $ins = $conn->prepare(
+          "INSERT INTO akun_pengguna (nama_lengkap, nim_nip, email, password, status)
                      VALUES (?, ?, ?, ?, ?)"
-                );
-                $ins->bind_param('sssss', $nama, $nim, $email, $hashed, $status);
-                if ($ins->execute()) {
-                    $success = 'Akun berhasil dibuat! Silakan login.';
-                } else {
-                    $error = 'Gagal membuat akun. Coba lagi.';
-                }
-                $ins->close();
-            }
-            $chk->close();
+        );
+        $ins->bind_param('sssss', $nama, $nim, $email, $hashed, $status);
+        if ($ins->execute()) {
+          $success = 'Akun berhasil dibuat! Silakan login.';
         } else {
-            $success = 'Akun berhasil dibuat (mode demo)! Silakan login.';
+          $error = 'Gagal membuat akun. Coba lagi.';
         }
+        $ins->close();
+      }
+      $chk->close();
+    } else {
+      $success = 'Akun berhasil dibuat (mode demo)! Silakan login.';
     }
+  }
 }
 ?>
 <!DOCTYPE html>
