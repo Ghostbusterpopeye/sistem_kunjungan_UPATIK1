@@ -143,7 +143,11 @@ include '../../includes/header.php';
                     $statusLabel = ['menunggu'=>'Menunggu','diproses'=>'Sedang Diproses','selesai'=>'Selesai'];
                     $tglIsi = date('d/m/Y H:i', strtotime($a['tanggal_isi']));
                 ?>
-                <div class="user-item antrean-row"> 
+                <div class="user-item antrean-row"
+                    data-nama="<?= htmlspecialchars($a['nama_lengkap']) ?>" 
+                    data-layanan="<?= htmlspecialchars($a['nama_layanan']) ?>" 
+                    data-nim="<?= htmlspecialchars($a['nim_nip']) ?>"> 
+                
                     <div class="user-avatar" style="background: linear-gradient(135deg, <?= $color ?> 0%, <?= $color ?>aa 100%);">
                         <?= $initials ?>
                     </div>

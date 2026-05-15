@@ -1,3 +1,4 @@
+admin-layanan (1).php
 <?php
 require_once '../../includes/auth.php';
 requireAdminLogin();
@@ -108,15 +109,9 @@ include '../../includes/header.php';
 
                 <div style="display:flex;gap:8px;padding-top:1rem;border-top:1px solid #f0f0f0;">
                     <!-- Edit -->
-                    <button class="btn-action" style="flex:1;"
+                    <button class="btn-action" style="padding: 0.5rem 1.5rem; justify-content: center;"
                             onclick='openEditLayananModal(<?= $l['id_layanan'] ?>, <?= json_encode($l['nama_layanan'], JSON_HEX_APOS|JSON_HEX_QUOT) ?>, <?= json_encode($l['detail_layanan'], JSON_HEX_APOS|JSON_HEX_QUOT) ?>)'>
                         <i class="fas fa-edit"></i> Edit
-                    </button>
-
-                    <!-- Hapus -->
-                    <button class="btn-action" style="flex:1;background:#dc2626;color:white;"
-                            onclick="hapusLayanan(<?= $l['id_layanan'] ?>, '<?= htmlspecialchars($l['nama_layanan'], ENT_QUOTES) ?>')">
-                        <i class="fas fa-trash"></i> Hapus
                     </button>
                 </div>
             </div>
@@ -321,23 +316,7 @@ async function toggleStatus(id, isActive) {
     } catch { alert('Terjadi kesalahan jaringan.'); }
 }
 
-// ── HAPUS ─────────────────────────────────────────────────────────────────────
-async function hapusLayanan(id, nama) {
-    if (!confirm(`Hapus layanan "${nama}"?\nLayanan tidak dapat dihapus jika masih ada formulir terkait.`)) return;
-    const fd = new FormData();
-    fd.append('id_layanan', id);
-    try {
-        const res  = await fetch(BASE_URL + '/backend/layanan/hapus.php', { method:'POST', body:fd });
-        const data = await res.json();
-        if (data.success) {
-            showToast('✅ ' + data.message);
-            const card = document.getElementById('card-layanan-' + id);
-            if (card) card.remove();
-        } else {
-            showToast('❌ ' + data.message, false);
-        }
-    } catch { alert('Terjadi kesalahan jaringan.'); }
-}
+
 
 // Close modal on overlay click / Escape
 ['modalTambahLayanan','modalEditLayanan'].forEach(id => {
