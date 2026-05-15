@@ -44,7 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         $ins->bind_param('sssss', $nama, $nim, $email, $hashed, $status);
         if ($ins->execute()) {
-          $success = 'Akun berhasil dibuat! Silakan login.';
+          // Auto-login: ambil id pengguna yang baru dibuat
+          $new_id = $conn->insert_id;
+          $_SESSION['pengguna_id']     = $new_id;
+          $_SESSION['pengguna_nama']   = $nama;
+          $_SESSION['pengguna_nim']    = $nim;
+          $_SESSION['pengguna_email']  = $email;
+          $_SESSION['pengguna_status'] = $status;
+          // Redirect langsung ke beranda pengguna
+          header('Location: ' . BASE_URL . '/index.php');
+          exit;
         } else {
           $error = 'Gagal membuat akun. Coba lagi.';
         }
@@ -52,7 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       $chk->close();
     } else {
-      $success = 'Akun berhasil dibuat (mode demo)! Silakan login.';
+      // Mode demo: simulasi auto-login
+      $_SESSION['pengguna_id']     = 1;
+      $_SESSION['pengguna_nama']   = $nama;
+      $_SESSION['pengguna_nim']    = $nim;
+      $_SESSION['pengguna_email']  = $email;
+      $_SESSION['pengguna_status'] = $status;
+      header('Location: ' . BASE_URL . '/index.php');
+      exit;
     }
   }
 }
@@ -123,8 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button type="submit" class="btn btn-primary btn-block">Daftar Sekarang</button>
     </form>
-    <?php else: ?>
-    <a href="login.php" class="btn btn-primary btn-block">Masuk Sekarang →</a>
     <?php endif; ?>
 
     <div class="auth-footer">
