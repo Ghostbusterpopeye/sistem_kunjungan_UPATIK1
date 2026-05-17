@@ -67,7 +67,7 @@ $user = getCurrentUser();
                 </div>
                 <div>
                   <h4 style="font-size:1rem; margin-bottom:5px; color:var(--primary);">Telepon</h4>
-                  <p style="font-size:0.9rem; color:var(--text-muted);">(0331) 333532</p>
+                  <p style="font-size:0.9rem; color:var(--text-muted);">(0813) 36264400</p>
                 </div>
               </div>
 
